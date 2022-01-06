@@ -10,11 +10,11 @@ import { EspecDoctorsModule } from './espec-doctors/espec-doctors.module';
   imports: [
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: 'mysqldb',
-      port: 3306,
-      username: 'root',
-      password: '1234',
-      database: 'GCB_Challenge',
+      host: process.env.MYSQL_HOST,
+      port: process.env.MYSQL_PORT as unknown as number,
+      username: process.env.MYSQL_USER,
+      password: process.env.MYSQL_ROOT_PASSWORD,
+      database: process.env.MYSQL_DATABASE,
       entities: ['./**/*.entity.js'],
       synchronize: true,
       migrationsTableName: 'custom_migration_table',

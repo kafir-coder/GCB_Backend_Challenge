@@ -1,6 +1,5 @@
 import { HttpException } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
-import { doc } from 'prettier';
 import { CepService } from '../cep/cepService.service';
 import { DoctorsController } from './doctors.controller';
 import { DoctorsService } from './doctors.service';

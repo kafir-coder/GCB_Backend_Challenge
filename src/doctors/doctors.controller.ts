@@ -7,13 +7,12 @@ import {
   Param,
   Delete,
   Query,
-  Res,
-  BadRequestException,
   HttpException,
 } from '@nestjs/common';
 import { CepService } from '../cep/cepService.service';
 import { DoctorsService } from './doctors.service';
 import { CreateDoctorDto } from './dto/create-doctor.dto';
+import { ListDoctorDto } from './dto/list-doctor.dto';
 import { UpdateDoctorDto } from './dto/update-doctor.dto';
 
 @Controller('doctors')
@@ -38,14 +37,16 @@ export class DoctorsController {
   }
 
   @Get()
-  findAll(@Query() query) {
+  findAll(@Query() query: ListDoctorDto) {
     const { limit, page, ...rest } = query;
-
     return this.doctorsService.findAll({ limit, page }, rest);
   }
 
   @Get('findByEspecialidade/:espec_id')
-  async findByEspecialidade(@Param() param, @Query() paginateMetadata) {
+  async findByEspecialidade(
+    @Param() param,
+    @Query() paginateMetadata: ListDoctorDto,
+  ) {
     const { espec_id } = param;
 
     return await this.doctorsService.listDoctorthroughEspecialidade(
